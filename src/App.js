@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Admin, Resource } from 'react-admin';
-import { UserList } from './adminList';
+import { Admin, Resource, EditGuesser } from 'react-admin';
+import { UserList, UserEdit, RoleList } from './adminList';
 import fakeDataProvider from 'ra-data-fakerest';
 
 const dataProvider = fakeDataProvider({
@@ -10,20 +10,35 @@ const dataProvider = fakeDataProvider({
       name: "Leanne",
       lastname: "Graham",
       email: "sincere@april.biz",
-      role: "Unassigned"
+      role: 1
     },
     {
       id: 2,
       name: "Leanne",
       lastname: "Graham",
       email: "sincere@april.biz",
-      role: "Unassigned"
+      role: 0
     }
+  ],
+  roles: [
+    {
+      name: "Unassigned"
+    },
+    {
+      name: "Student"
+    },
+    {
+      name: "Lecturer"
+    },
+    {
+      name: "Admin"
+    },
   ]
 });
 const App = () => (
   <Admin dataProvider={dataProvider}>
-    <Resource name="users" list={UserList} />
+    <Resource name="users" list={UserList} edit={UserEdit} />
+    <Resource name="roles" list={RoleList} />
   </Admin>
   );
 
