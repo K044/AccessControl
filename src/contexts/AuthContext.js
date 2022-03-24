@@ -61,14 +61,8 @@ export default function AuthContextProvider({ children }) {
     return signOut(auth)
   }
 
-  function signInWithGoogle() {
-    const provider = new GoogleAuthProvider()
-    return signInWithPopup(auth, provider)
-  }
-
   const value = {
     currentUser,
-    signInWithGoogle,
     login,
     register,
     logout,

@@ -19,7 +19,7 @@ import {
   
   export default function Registerpage() {
     const history = useHistory()
-    const { signInWithGoogle, register } = useAuth()
+    const { register } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -108,20 +108,6 @@ import {
               Login
             </Button>
           </Center>
-          <DividerWithText my={6}>OR</DividerWithText>
-          <Button
-            variant='outline'
-            isFullWidth
-            colorScheme='red'
-            leftIcon={<FaGoogle />}
-            onClick={() =>
-              signInWithGoogle()
-                .then(user => console.log(user))
-                .catch(e => console.log(e.message))
-            }
-          >
-            Sign in with Google
-          </Button>
         </Card>
       </Layout>
     )

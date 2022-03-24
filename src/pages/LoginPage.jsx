@@ -20,7 +20,7 @@ import {
   
   export default function LoginPage() {
     const history = useHistory()
-    const { signInWithGoogle, login } = useAuth()
+    const { login } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -132,23 +132,6 @@ import {
               Register
             </Button>
           </HStack>
-          <DividerWithText my={6}>OR</DividerWithText>
-          <Button
-            variant='outline'
-            isFullWidth
-            colorScheme='red'
-            leftIcon={<FaGoogle />}
-            onClick={() =>
-              signInWithGoogle()
-                .then(user => {
-                  handleRedirectToOrBack()
-                  console.log(user)
-                })
-                .catch(e => console.log(e.message))
-            }
-          >
-            Sign in with Google
-          </Button>
         </Card>
       </Layout>
     )
