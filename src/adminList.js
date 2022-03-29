@@ -28,6 +28,7 @@ export const UserEdit = props => (
 export const RoleList = props => (
     <List {...props}>
         <Datagrid rowClick="edit">
+            <TextField source="id" />
             <TextField source="name" />
         </Datagrid>
     </List>

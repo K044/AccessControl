@@ -2,7 +2,6 @@ import * as React from "react";
 import { Admin, Resource } from 'react-admin';
 import { Navbar } from '../components/Navbar'
 import { UserList, UserEdit, RoleList } from '../adminList';
-import fakeDataProvider from 'ra-data-fakerest';
 import { FirebaseAuthProvider, FirebaseDataProvider } from "react-admin-firebase";
 import { AdminLayout } from '../adminLayout'
 import { Box } from '@chakra-ui/react'
@@ -17,39 +16,8 @@ const firebaseConfig = {
   };
 
 const authProvider = FirebaseAuthProvider(firebaseConfig);
-//const dataProvider = FirebaseDataProvider(firebaseConfig);
-const dataProvider = fakeDataProvider({
-  users : [
-    {
-      id: 1,
-      name: "Vardenis",
-      lastname: "Pavardenis",
-      email: "vardenispavardenis@gmail.com",
-      role: 1
-    },
-    {
-      id: 2,
-      name: "Petras",
-      lastname: "Petrauskas",
-      email: "petraspetrauskas@gmail.com",
-      role: 0
-    }
-  ],
-  roles: [
-    {
-      name: "Unassigned"
-    },
-    {
-      name: "Student"
-    },
-    {
-      name: "Lecturer"
-    },
-    {
-      name: "Admin"
-    },
-  ]
-});
+const dataProvider = FirebaseDataProvider(firebaseConfig);
+
 
 export default function AdminPage() {
 return (
