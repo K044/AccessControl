@@ -13,6 +13,9 @@ export default function Homepage() {
             {currentUser && (
                 <Grid gap={6}>
                     <GridItem w='100%' h='10' align='center'>
+                        <Navlink  to='/lecturer' name='Lecturer page - (nera dar roliu todėl palieku dabar čia)'/>
+                    </GridItem>
+                    <GridItem w='100%' h='10' align='center'>
                         <Navlink  to='/admin' name='Admin panel'/>
                     </GridItem>
                     <GridItem w='100%' h='10' align='center'>
