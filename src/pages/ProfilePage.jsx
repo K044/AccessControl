@@ -1,18 +1,20 @@
-import { chakra, Container, Heading } from '@chakra-ui/react'
+import { Button, Grid, GridItem,chakra, Container, Heading } from '@chakra-ui/react'
 import React from 'react'
 import { Layout } from '../components/Layout'
 import { useAuth } from '../contexts/AuthContext'
+import Navlink from '../components/Navlink'
 
 export default function Profilepage() {
   const { currentUser } = useAuth()
+  
   return (
-    <Layout>
+      <Layout>
       <Heading>Profile page</Heading>
-      <Container maxW='container.lg' overflowX='auto' py={4}>
-        <chakra.pre p={4}>
-          {currentUser && <pre> {JSON.stringify(currentUser, null, 2)}</pre>}
-        </chakra.pre>
-      </Container>
-    </Layout>
+      <div>User: {currentUser.email}</div>
+      <div>User role: eee {currentUser.role}</div>
+      <Button colorScheme='pink' size='lg' width="200px" variant ='outline'>
+          <Navlink  to='/reset-password' name='Reset Password'/>
+      </Button>
+ </Layout>
   )
 }
