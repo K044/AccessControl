@@ -13,7 +13,7 @@ export default function Profilepage() {
       <div>User: {currentUser.email}</div>
       <div>User role: eee {currentUser.role}</div>
       <Button colorScheme='pink' size='lg' width="200px" variant ='outline'>
-          <Navlink  to='/reset-password' name='Reset Password'/>
+          <Navlink  to='/reset-password' name='Change Password'/>
       </Button>
  </Layout>
   )
