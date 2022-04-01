@@ -16,12 +16,16 @@ import {
   import DividerWithText from '../components/DividerWithText'
   import { Layout } from '../components/Layout'
   import { useAuth } from '../contexts/AuthContext'
+  import { db, auth } from '../utils/init-firebase'
+  import { doc, setDoc } from "firebase/firestore"; 
   
   export default function Registerpage() {
     const history = useHistory()
     const { register } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [name, setName] = useState('')
+    const [lastname, setLastname] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
     const toast = useToast()
     const mounted = useRef(false)
@@ -53,7 +57,7 @@ import {
               }
               // your register logic here
               setIsSubmitting(true)
-              register(email, password)
+              await register(email, password)
                 .then(res => {})
                 .catch(error => {
                   console.log(error.message)
@@ -67,6 +71,14 @@ import {
                 .finally(() => {
                   mounted.current && setIsSubmitting(false)
                 })
+                var user = auth.currentUser
+                await setDoc(doc(db, "users", user.uid.toString()), {
+                  id: user.uid.toString(),
+                  name: name.toString(),
+                  lastname: lastname.toString(),
+                  email: email.toString(),
+                  role: 0
+                });
             }}
           >
             <Stack spacing='6'>
@@ -90,6 +102,28 @@ import {
                   required
                   value={password}
                   onChange={e => setPassword(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id='name'>
+                <FormLabel>Name</FormLabel>
+                <Input
+                  name='name'
+                  type='name'
+                  autoComplete='name'
+                  required
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id='lastname'>
+                <FormLabel>Last name</FormLabel>
+                <Input
+                  name='lastname'
+                  type='lastname'
+                  autoComplete='lastname'
+                  required
+                  value={lastname}
+                  onChange={e => setLastname(e.target.value)}
                 />
               </FormControl>
               <Button
