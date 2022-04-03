@@ -10,17 +10,20 @@ import {
     useToast,
   } from '@chakra-ui/react'
   import React, { useState } from 'react'
+import { Logout } from 'react-admin'
   import { FaGoogle } from 'react-icons/fa'
   import { Link, useHistory, useLocation } from 'react-router-dom'
   import { Card } from '../components/Card'
   import DividerWithText from '../components/DividerWithText'
   import { Layout } from '../components/Layout'
   import { useAuth } from '../contexts/AuthContext'
+  import { db, auth } from '../utils/init-firebase'
   import useMounted from '../hooks/useMounted'
+  import { doc, getDoc } from "firebase/firestore";
   
   export default function LoginPage() {
     const history = useHistory()
-    const { login } = useAuth()
+    const { login, logout } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isSubmitting, setIsSubmitting] = useState(false)
@@ -67,7 +70,7 @@ import {
               }
               // your login logic here
               setIsSubmitting(true)
-              login(email, password)
+              await login(email, password)
                 .then(res => {
                   handleRedirectToOrBack()
                 })
@@ -81,12 +84,23 @@ import {
                   })
                 })
                 .finally(() => {
-                  // setTimeout(() => {
-                  //   mounted.current && setIsSubmitting(false)
-                  //   console.log(mounted.current)
-                  // }, 1000)
                   mounted.current && setIsSubmitting(false)
                 })
+                var user = auth.currentUser
+                console.log(user.uid)
+                const docRef = doc(db, "users", user.uid.toString())
+                const docSnap = await getDoc(docRef)
+                if (docSnap.exists()) {
+                  if(docSnap.data().role == 0){
+                    toast({
+                      description: "User " + docSnap.data().email + " does not have a role, wait for an admin!",
+                      status: 'error',
+                      duration: 9000,
+                      isClosable: true,
+                    })
+                    logout()
+                  }
+                }
             }}
           >
             <Stack spacing='6'>
