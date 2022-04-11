@@ -17,6 +17,7 @@ import ResetPasswordPage from '../pages/ResetPasswordPage'
 import TestPage from '../pages/TestPage'
 import AdminPage from '../pages/AdminPage'
 import LecturerPage from '../pages/LecturerPage'
+import StudentPage from "../pages/StudentPage";
 
 export default function AppRouter(props) {
   return (
@@ -30,6 +31,7 @@ export default function AppRouter(props) {
           <ProtectedRoute exact path='/test' component={TestPage} />
           <ProtectedRoute exact path='/admin' component={AdminPage} />
           <ProtectedRoute exact path='/lecturer' component={LecturerPage} />
+          <ProtectedRoute exact path='/student' component={StudentPage} />
           <ProtectedRoute
             exact
             path='/forgot-password'

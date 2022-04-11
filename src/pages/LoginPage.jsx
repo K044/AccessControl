@@ -91,6 +91,7 @@ import { Logout } from 'react-admin'
                 const docRef = doc(db, "users", user.uid.toString())
                 const docSnap = await getDoc(docRef)
                 if (docSnap.exists()) {
+                  console.log(docSnap.data().role)
                   if(docSnap.data().role == 0){
                     toast({
                       description: "User " + docSnap.data().email + " does not have a role, wait for an admin!",
