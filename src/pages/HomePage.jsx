@@ -48,7 +48,7 @@ export default function Homepage() {
                         <Navlink to='/qrgenerator' name='QR generator'/>
                     </GridItem>
                 </Grid>
-            )}+
+            )}
         </Layout>
     )
 }

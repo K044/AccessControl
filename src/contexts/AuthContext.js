@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { auth } from '../utils/init-firebase'
+import { doc, getDoc } from "firebase/firestore";
+import { db, auth } from '../utils/init-firebase'
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -19,6 +20,7 @@ const AuthContext = createContext({
   logout: () => Promise,
   forgotPassword: () => Promise,
   resetPassword: () => Promise,
+  getUserInfo: null,
 })
 
 export const useAuth = () => useContext(AuthContext)
@@ -60,6 +62,12 @@ export default function AuthContextProvider({ children }) {
   function logout() {
     return signOut(auth)
   }
+  
+  async function getUserInfo(){
+    const docRef = doc(db, "users", auth.currentUser.uid.toString())
+    const docSnap = await getDoc(docRef)
+    return docSnap.data()
+  }
 
   const value = {
     currentUser,
@@ -68,6 +76,7 @@ export default function AuthContextProvider({ children }) {
     logout,
     forgotPassword,
     resetPassword,
+    getUserInfo,
   }
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
