@@ -14,6 +14,7 @@ import {
 
 const AuthContext = createContext({
   currentUser: null,
+  userRole: null,
   signInWithGoogle: () => Promise,
   login: () => Promise,
   register: () => Promise,
@@ -27,9 +28,15 @@ export const useAuth = () => useContext(AuthContext)
 
 export default function AuthContextProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null)
+  const [userRole, setUserRole] = useState(null)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
+    const unsubscribe = onAuthStateChanged(auth, async user => {
+      if (user) {
+        const docRef = doc(db, "users", user.uid.toString());
+        const docSnap = await getDoc(docRef);
+        setUserRole(docSnap.data().role || 0);
+      }
       setCurrentUser(user ? user : null)
     })
     return () => {
@@ -71,6 +78,7 @@ export default function AuthContextProvider({ children }) {
 
   const value = {
     currentUser,
+    userRole,
     login,
     register,
     logout,

@@ -30,9 +30,9 @@ export default function AppRouter(props) {
           <ProtectedRoute exact path='/register' component={Registerpage} />
           <ProtectedRoute exact path='/profile' component={Profilepage} />
           <ProtectedRoute exact path='/test' component={TestPage} />
-          <ProtectedRoute exact path='/admin' component={AdminPage} />
-          <ProtectedRoute exact path='/lecturer' component={LecturerPage} />
-          <ProtectedRoute exact path='/student' component={StudentPage} />
+          <ProtectedRoute exact path='/admin' role={3} component={AdminPage} />
+          <ProtectedRoute exact path='/lecturer' role={2} component={LecturerPage} />
+          <ProtectedRoute exact path='/student' role={1} component={StudentPage} />
           <ProtectedRoute exact path='/qrscanner' component={QRScannerPage} />
           <ProtectedRoute
             exact
@@ -48,8 +48,8 @@ export default function AppRouter(props) {
 }
 
 function ProtectedRoute(props) {
-  const { currentUser } = useAuth()
-  const { path } = props
+  const { currentUser, userRole } = useAuth()
+  const { path, role } = props
   console.log('path', path)
   const location = useLocation()
   console.log('location state', location.state)
@@ -66,14 +66,38 @@ function ProtectedRoute(props) {
       <Route {...props} />
     )
   }
-  return currentUser ? (
-    <Route {...props} />
-  ) : (
+
+  if (!currentUser) {
+    return (
+      <Redirect
+      to={{
+        pathname: '/login',
+        state: {from: path},
+      }}
+    />
+    )
+  }
+
+  if (role !== undefined) {
+    if (role === userRole) {
+      return <Route {...props} />;
+    } else {
+      return <Redirect
+        to={{
+          pathname: '/notfound',
+        }}
+      />
+    }
+  } else {
+    return <Route {...props} />;
+  }
+
+  return (
     <Redirect
       to={{
         pathname: '/login',
-        state: { from: path },
+        state: {from: path},
       }}
     />
-  )
+  );
 }
