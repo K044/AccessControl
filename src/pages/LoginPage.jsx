@@ -8,6 +8,8 @@ import {
   Input,
   Stack,
   useToast,
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
+  useDisclosure,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { Logout } from 'react-admin'
@@ -29,6 +31,7 @@ export default function LoginPage() {
   const toast = useToast()
   // const mounted = useRef(false)
   const location = useLocation()
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   // useEffect(() => {
   //   mounted.current = true
@@ -94,9 +97,25 @@ export default function LoginPage() {
                     isClosable: true,
                   })
                   logout()
+                  history.push("/random")
+                  // history.push("/login")
+                  // onOpen()
+                  // reikia kazkaip kad grazintu į login page o ne i home page ir aktyvuotu modal su onOpen()
               }
           }}
         >
+           <Button onClick={onOpen}>Test Modal</Button>
+           <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>Access Denied</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>Wait for an admin for approval</ModalBody>
+              <ModalFooter>
+              <Button colorScheme='blue' mr={3} onClick={onClose}>Close</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
           <Stack spacing='6'>
             <FormControl id='email'>
               <FormLabel>Email address</FormLabel>

@@ -21,7 +21,7 @@ import {
   
   export default function Registerpage() {
     const history = useHistory()
-    const { register } = useAuth()
+    const { register, logout } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -79,6 +79,7 @@ import {
                   email: email.toString(),
                   role: 0
                 });
+                logout()
             }}
           >
             <Stack spacing='6'>
