@@ -96,10 +96,12 @@ export default function LoginPage() {
                     duration: 9000,
                     isClosable: true,
                   })
-                  logout()
-                  history.push("/random")
-                  // history.push("/login")
-                  // onOpen()
+                  await logout().then(res => {
+                    history.push("/login")
+                    onOpen()
+                  })
+                  // history.push("/random")
+                  
                   // reikia kazkaip kad grazintu į login page o ne i home page ir aktyvuotu modal su onOpen()
               }
           }}
