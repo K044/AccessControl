@@ -90,15 +90,9 @@ export default function LoginPage() {
               })
               const a = await getUserInfo()
                 if(a.role == 0){
-                  toast({
-                    description: "User " + a.name + " does not have a role, wait for an admin!",
-                    status: 'error',
-                    duration: 9000,
-                    isClosable: true,
-                  })
                   await logout().then(res => {
                     history.push("/login")
-                    onOpen()
+                    document.getElementById("btn").click()
                   })
                   // history.push("/random")
                   
@@ -106,13 +100,13 @@ export default function LoginPage() {
               }
           }}
         >
-           <Button onClick={onOpen}>Test Modal</Button>
+           <Button id="btn" onClick={onOpen} hidden>Test Modal</Button>
            <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
               <ModalContent>
                 <ModalHeader>Access Denied</ModalHeader>
               <ModalCloseButton />
-              <ModalBody>Wait for an admin for approval</ModalBody>
+              <ModalBody>This website is available only for users that are approved, please wait for an admin to confirm your account.</ModalBody>
               <ModalFooter>
               <Button colorScheme='blue' mr={3} onClick={onClose}>Close</Button>
               </ModalFooter>

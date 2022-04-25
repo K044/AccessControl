@@ -79,7 +79,11 @@ import {
                   email: email.toString(),
                   role: 0
                 });
-                logout()
+                await logout().then(res => {
+                  history.push("/login")
+                  document.getElementById("btn").click()
+                })
+                
             }}
           >
             <Stack spacing='6'>
