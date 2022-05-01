@@ -9,9 +9,11 @@ import {
   import React from 'react'
   import { FaMoon, FaSun } from 'react-icons/fa'
   import { useAuth } from '../contexts/AuthContext'
+  import { useHistory } from 'react-router-dom'
   import Navlink from './Navlink'
   
   export function Navbar() {
+    const history = useHistory()
     const { toggleColorMode } = useColorMode()
     const { logout, currentUser } = useAuth()
   
@@ -40,6 +42,7 @@ import {
               onClick={async e => {
                 e.preventDefault()
                 await logout()
+                history.push('/login')
               }}
             />
           )}
