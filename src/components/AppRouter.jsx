@@ -19,6 +19,7 @@ import AdminPage from '../pages/AdminPage'
 import LecturerPage from '../pages/LecturerPage'
 import StudentPage from "../pages/StudentPage";
 import QRScannerPage from "../pages/QRScannerPage";
+import QRGeneratorPage from "../pages/QRGeneratorPage";
 
 export default function AppRouter(props) {
   return (
@@ -34,6 +35,7 @@ export default function AppRouter(props) {
           <ProtectedRoute exact path='/lecturer' role={2} component={LecturerPage} />
           <ProtectedRoute exact path='/student' role={1} component={StudentPage} />
           <ProtectedRoute exact path='/qrscanner' component={QRScannerPage} />
+          <ProtectedRoute exact path='/qrgenerator' component={QRGeneratorPage} />
           <ProtectedRoute
             exact
             path='/forgot-password'
