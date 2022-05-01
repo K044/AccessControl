@@ -1,82 +1,46 @@
 import React, {useState} from 'react'
 import { Navbar } from '../components/Navbar'
-import {Fab, TextField, TextareaAutosize, Grid} from '@material-ui/core'
-import {ArrowBack, GetApp} from '@material-ui/icons'
-import { Link } from "react-router-dom";
-import QRcode from 'qrcode.react'
+import { doc, setDoc } from "firebase/firestore"; 
+import { db } from '../utils/init-firebase'
+import { useHistory } from 'react-router-dom'
 
 function QRgenerator() {
-    const [qr, setQr] = useState('');
-    const handleChange = (event) => {
-        setQr(event.target.value);
-    };
-    const downloadQR = () => {
-        const canvas = document.getElementById("myqr");
-        const pngUrl = canvas
-          .toDataURL("image/png")
-          .replace("image/png", "image/octet-stream");
-        let downloadLink = document.createElement("a");
-        downloadLink.href = pngUrl;
-        downloadLink.download = "myqr.png";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    };
-
+    const history = useHistory();
+    const [number, setNumber] = useState("");
+    const [faculty, setFaculty] = useState("");
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        var md5 = require('md5');
+        const timestamp = Date.now();
+        const id = md5(timestamp).substring(0, 13)
+        setDoc(doc(db, "qrcodes", id), {
+            number: number,
+            faculty: faculty
+        });
+        history.push('/qrcode/'+id)
+      }
     return (
         <div>
-        <Navbar/>
-        <div className="App-header-modified">
-          
-          
-            <Link to="/">
-            <Fab style={{marginRight:10}} color="primary">
-                <ArrowBack/>
-            </Fab>
-            </Link>
-            <span>QR Generator</span>
-            
-            <div style={{marginTop:30}}>
-                <TextField onChange={handleChange} style={{width:320}}
-                value={qr} label="QR content" size="large" variant="outlined" color="primary" 
-                />
-            </div>
-
-            <div>
-                {
-                    qr ?
-                    <QRcode 
-                        id="myqr"
-                        value={qr} 
-                        size={320}
-                        includeMargin={true}
-                    /> :
-                    <p>No QR code preview</p>
-                }
-            </div>
-            <div>
-                {
-                    qr ? 
-                    <Grid container>
-                        <Grid item xs={10}>
-                        <TextareaAutosize
-                            style={{fontSize:18, width:250, height:100}}
-                            rowsMax={4}
-                            defaultValue={qr}
-                            value={qr}
-                        />
-                        </Grid>
-                        <Grid item xs={2}>
-                        <Fab onClick={downloadQR} style={{marginLeft:10}} color="primary">
-                            <GetApp/>
-                        </Fab>
-                        </Grid>
-                    </Grid> :
-                    ''
-                }
-            </div>
-      </div>
-      </div>
+            <Navbar />
+            <form onSubmit={handleSubmit}>
+                <label>Classroom number:
+                    <input
+                    type="number" 
+                    value={number}
+                    onChange={(e) => setNumber(e.target.value)}
+                    />
+                </label>
+                <label>Faculty number:
+                    <input
+                    type="number" 
+                    value={faculty}
+                    onChange={(e) => setFaculty(e.target.value)}
+                    />
+                </label>
+                <input type="submit" />
+            </form>
+        </div>
+      
     );
   }
   

@@ -20,6 +20,7 @@ import LecturerPage from '../pages/LecturerPage'
 import StudentPage from "../pages/StudentPage";
 import QRScannerPage from "../pages/QRScannerPage";
 import QRGeneratorPage from "../pages/QRGeneratorPage";
+import QRDisplayPage from "../pages/QRDisplayPage";
 
 export default function AppRouter(props) {
   return (
@@ -36,6 +37,7 @@ export default function AppRouter(props) {
           <ProtectedRoute exact path='/student' role={1} component={StudentPage} />
           <ProtectedRoute exact path='/qrscanner' component={QRScannerPage} />
           <ProtectedRoute exact path='/qrgenerator' component={QRGeneratorPage} />
+          <ProtectedRoute exact path='/qrcode/:id' component={QRDisplayPage} />
           <ProtectedRoute
             exact
             path='/forgot-password'
