@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, Edit, SimpleForm, ReferenceInput, SelectInput, ReferenceField  } from 'react-admin';
+import { SelectField, List, Datagrid, TextField, EmailField, Edit, SimpleForm, ReferenceInput, SelectInput, ReferenceField  } from 'react-admin';
 
 export const UserList = props => (
     <List {...props}>
@@ -8,9 +8,12 @@ export const UserList = props => (
             <TextField source="name" />
             <TextField source="lastname" />
             <EmailField source="email" />
-            <ReferenceField source="role" reference="roles">
-                <TextField source="name" />
-            </ReferenceField>
+            <SelectField source="role" choices={[
+                { id: 0, name: 'Unassigned' },
+                { id: 1, name: 'Student' },
+                { id: 2, name: 'Lecturer' },
+                { id: 3, name: 'Admin' },
+            ]} />
         </Datagrid>
     </List>
 );
@@ -27,7 +30,7 @@ export const UserEdit = props => (
 
 export const RoleList = props => (
     <List {...props}>
-        <Datagrid rowClick="edit">
+        <Datagrid>
             <TextField source="id" />
             <TextField source="name" />
         </Datagrid>
