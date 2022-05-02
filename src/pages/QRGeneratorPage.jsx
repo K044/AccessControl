@@ -23,21 +23,25 @@ function QRgenerator() {
         <div>
             <Navbar />
             <form onSubmit={handleSubmit}>
-                <label>Classroom number:
+                <label>Classroom number: 
                     <input
                     type="number" 
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
                     />
                 </label>
-                <label>Faculty number:
+                <br></br>
+                <br></br>
+                <label>Faculty number: 
                     <input
                     type="number" 
                     value={faculty}
                     onChange={(e) => setFaculty(e.target.value)}
                     />
                 </label>
-                <input type="submit" />
+                <br></br>
+                <br></br>
+                <input type="submit" value="Submit" />
             </form>
         </div>
       

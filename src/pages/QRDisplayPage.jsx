@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 
 function QRDisplayPage() {
     const { id } = useParams();
-    const link = 'https://localhost:3000/qrcode/'+id
+    const link = 'https://localhost:3000/scan/'+id
     const [qr, setQr] = useState(link);
     const handleChange = (event) => {
         setQr(event.target.value);
@@ -37,19 +37,13 @@ function QRDisplayPage() {
             </Fab>
             </Link>
             <span>Generated QR code</span>
-            
-            <div style={{marginTop:30}}>
-                <TextField onChange={handleChange} style={{width:320}}
-                value={qr} label="QR content" size="large" variant="outlined" color="primary" 
-                />
-            </div>
 
             <div>
                 {
                     qr ?
                     <QRcode 
                         id="myqr"
-                        value={id} 
+                        value={qr} 
                         size={320}
                         includeMargin={true}
                     /> :

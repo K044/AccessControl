@@ -16,6 +16,8 @@ class Test extends Component {
 
   handleScan = data => {
     if (data) {
+      const link = data.substring(data.indexOf("/scan") + 1);
+      window.open(link, '_self')
       this.state.result = data;
         console.log(this.state.result);
         this.setState({result: data});
