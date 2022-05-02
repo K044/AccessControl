@@ -38,8 +38,8 @@ export default function AppRouter(props) {
           <ProtectedRoute exact path='/student' role={1} component={StudentPage} />
           <ProtectedRoute exact path='/qrscanner' component={QRScannerPage} />
           <ProtectedRoute exact path='/qrgenerator' component={QRGeneratorPage} />
-          <Route exact path='/qrcode/:id' component={QRDisplayPage} />
-          <Route exact path='/scan/:id' component={QRCheckPage} />
+          <ProtectedRoute exact path='/qrcode/:id' component={QRDisplayPage} />
+          <ProtectedRoute exact path='/scan/:id' component={QRCheckPage} />
           <ProtectedRoute
             exact
             path='/forgot-password'
@@ -55,10 +55,11 @@ export default function AppRouter(props) {
 
 function ProtectedRoute(props) {
   const { currentUser, userRole } = useAuth()
-  const { path, role } = props
+  var { path, role } = props
   console.log('path', path)
   const location = useLocation()
   console.log('location state', location.state)
+  path = location.pathname
 
   if (
     path === '/login' ||
