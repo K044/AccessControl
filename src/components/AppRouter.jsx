@@ -6,6 +6,8 @@ import {
   Switch,
   useLocation,
 } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
+import { css } from "@emotion/react";
 import { useAuth } from '../contexts/AuthContext'
 import ForgotPasswordPage from '../pages/ForgotPasswordPage'
 import Homepage from '../pages/HomePage'
@@ -54,13 +56,22 @@ export default function AppRouter(props) {
 }
 
 function ProtectedRoute(props) {
+  const override = css`
+  display: block;
+  margin: 40vh auto;
+  border-color: black;
+`;
   const { currentUser, userRole } = useAuth()
   var { path, role } = props
   console.log('path', path)
   const location = useLocation()
   console.log('location state', location.state)
   path = location.pathname
-
+  if(currentUser == null) {
+    return (
+      <ClipLoader color={"#ffffff"} loading={true} css={override} size={150} />
+    )
+  }
   if (
     path === '/login' ||
     path === '/register' ||

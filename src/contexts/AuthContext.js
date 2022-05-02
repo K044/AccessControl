@@ -37,7 +37,7 @@ export default function AuthContextProvider({ children }) {
         const docSnap = await getDoc(docRef);
         setUserRole(docSnap.data().role || 0);
       }
-      setCurrentUser(user ? user : null)
+      setCurrentUser(user ? user : false)
     })
     return () => {
       unsubscribe()
