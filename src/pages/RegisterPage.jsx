@@ -88,7 +88,7 @@ import {
           >
             <Stack spacing='6'>
             <FormControl id='name'>
-                <FormLabel>First name</FormLabel>
+                <FormLabel>First Name</FormLabel>
                 <Input
                   name='name'
                   type='name'
@@ -99,7 +99,7 @@ import {
                 />
               </FormControl>
               <FormControl id='lastname'>
-                <FormLabel>Last name</FormLabel>
+                <FormLabel>Last Name</FormLabel>
                 <Input
                   name='lastname'
                   type='lastname'
