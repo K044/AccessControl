@@ -52,7 +52,7 @@ export default function Profilepage() {
                   <Td><Text fontSize={20} as='i'>Email</Text></Td>
                   <Td>{email}</Td>
                 </Tr>
-                </Tbody>
+                </Tbody>  
              </Table>
             </TableContainer>     
           </Box>
