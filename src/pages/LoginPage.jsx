@@ -114,7 +114,7 @@ export default function LoginPage() {
           </Modal>
           <Stack spacing='6'>
             <FormControl id='email'>
-              <FormLabel>Email address</FormLabel>
+              <FormLabel>Email Address</FormLabel>
               <Input
                 name='email'
                 type='email'

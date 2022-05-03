@@ -87,30 +87,8 @@ import {
             }}
           >
             <Stack spacing='6'>
-              <FormControl id='email'>
-                <FormLabel>Email address</FormLabel>
-                <Input
-                  name='email'
-                  type='email'
-                  autoComplete='email'
-                  required
-                  value={email}
-                  onChange={e => setEmail(e.target.value)}
-                />
-              </FormControl>
-              <FormControl id='password'>
-                <FormLabel>Password</FormLabel>
-                <Input
-                  name='password'
-                  type='password'
-                  autoComplete='password'
-                  required
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                />
-              </FormControl>
-              <FormControl id='name'>
-                <FormLabel>Name</FormLabel>
+            <FormControl id='name'>
+                <FormLabel>First name</FormLabel>
                 <Input
                   name='name'
                   type='name'
@@ -129,6 +107,28 @@ import {
                   required
                   value={lastname}
                   onChange={e => setLastname(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id='email'>
+                <FormLabel>Email Address</FormLabel>
+                <Input
+                  name='email'
+                  type='email'
+                  autoComplete='email'
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                />
+              </FormControl>
+              <FormControl id='password'>
+                <FormLabel>Password</FormLabel>
+                <Input
+                  name='password'
+                  type='password'
+                  autoComplete='password'
+                  required
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
                 />
               </FormControl>
               <Button
