@@ -1,4 +1,4 @@
-import {Grid, GridItem, Heading,} from '@chakra-ui/react'
+import {Grid, GridItem, Heading, Center, Stack, Button} from '@chakra-ui/react'
 import React, {useEffect, useState} from 'react'
 import {Layout} from '../components/Layout'
 import Navlink from "../components/Navlink";
@@ -21,23 +21,27 @@ export default function StudentPage() {
     }, [currentUser]);
     return (
         <Layout>
-            <Heading>Home page</Heading>
+            <Heading>Students page</Heading><br></br>
             {currentUser && (
                 <Grid gap={6}>
                     {role === 1 && (
                         <>
-                            <GridItem w='100%' h='10' align='center'>
-                                <Navlink  to='/attendance' name='My attendance page'/>
-                            </GridItem>
-                            <GridItem w='100%' h='10' align='center'>
-                                <Navlink  to='/calendar' name='My calendar page'/>
-                            </GridItem>
+                            <Center>
+                            <Stack spacing={6} direction='column' align='center'>
+                            <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
+                            <Navlink to='/doesnotexist' name='My Calendar'/>
+                            </Button>
+                            <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
+                            <Navlink to='/doesnotexist' name='Check My Attendance'/>
+                            </Button>
+                            </Stack>
+                            </Center>
                         </>
 
                         )}
 
                 </Grid>
-            )}+
+            )}
         </Layout>
     )
 }

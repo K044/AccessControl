@@ -30,7 +30,7 @@ import {
           mx='auto'
           spacing={4}
         >
-          <Navlink to='/' name='Home' size='lg' />
+          <Navlink to='/' name='Home' size='lg' colorScheme='pink' variant='outline' />
           <Spacer />
           {!currentUser && <Navlink to='/login' name='Login' />}
           {!currentUser && <Navlink to='/register' name='Register' />}

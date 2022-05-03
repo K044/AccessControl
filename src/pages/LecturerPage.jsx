@@ -9,9 +9,9 @@ export default function LecturerPage() {
   return (
       <Layout>
           <Box>
-            <Heading>Lecturers page</Heading>
+            <Heading>Lecturers page</Heading><br></br>
             <Center>
-            <Stack spacing={4} direction='column' align='center'>
+            <Stack spacing={6} direction='column' align='center'>
                 <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
                 <Navlink to='/doesnotexist' name='My Calendar'/>
                 </Button>
