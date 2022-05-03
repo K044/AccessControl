@@ -3,7 +3,7 @@ import { Navbar } from '../components/Navbar'
 import {Fab, TextField, TextareaAutosize, Grid} from '@material-ui/core'
 import {ArrowBack, GetApp} from '@material-ui/icons'
 import { Link } from "react-router-dom";
-import QRcode from 'qrcode.react'
+import QRCode from 'qrcode.react'
 import { useParams } from 'react-router-dom'
 
 function QRDisplayPage() {
@@ -41,11 +41,16 @@ function QRDisplayPage() {
             <div>
                 {
                     qr ?
-                    <QRcode 
+                    <QRCode 
                         id="myqr"
                         value={qr} 
-                        size={320}
+                        size={500}
                         includeMargin={true}
+                        imageSettings={{
+                            src: "https://i.imgur.com/ItWHwqu.png",
+                            height: 100,
+                            width: 100,
+                        }}
                     /> :
                     <p>No QR code preview</p>
                 }
