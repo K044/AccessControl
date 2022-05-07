@@ -13,9 +13,7 @@ import {
   import { Layout } from '../components/Layout'
   import { useHistory, useLocation } from 'react-router-dom'
   import { useAuth } from '../contexts/AuthContext'
-  
-  // A custom hook that builds on useLocation to parse
-  // the query string for you.
+
   function useQuery() {
     return new URLSearchParams(useLocation().search)
   }

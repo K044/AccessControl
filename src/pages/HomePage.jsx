@@ -6,7 +6,6 @@ import {useAuth} from "../contexts/AuthContext";
 
 export default function Homepage() {
     const {logout, currentUser, userRole } = useAuth()
-/*    console.log(currentUser.getIdTokenResult().then((test=>{console.log(test)}))*/
     return (
         <Layout>
             <Heading>Home page</Heading> <br></br>

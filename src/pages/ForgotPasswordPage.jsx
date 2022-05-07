@@ -32,7 +32,6 @@ import {
           <chakra.form
             onSubmit={async e => {
               e.preventDefault()
-              // your login logic here
               try {
                 await forgotPassword(email)
                 toast({
