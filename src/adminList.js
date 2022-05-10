@@ -1,6 +1,14 @@
 import * as React from "react";
-import { SelectField, List, Datagrid, TextField, EmailField, Edit, SimpleForm, ReferenceInput, SelectInput, ReferenceField  } from 'react-admin';
+import { SelectField, List, Datagrid, TextField, EmailField, Edit, SimpleForm, ReferenceInput, SelectInput, UrlField  } from 'react-admin';
+import { useAuth } from './contexts/AuthContext'
+import { ClipLoader } from 'react-spinners'
+import { css } from "@emotion/react";
 
+const override = css`
+  display: block;
+  margin: 40vh auto;
+  border-color: black;
+`;
 export const UserList = props => (
     <List {...props}>
         <Datagrid rowClick="edit">
@@ -36,3 +44,22 @@ export const RoleList = props => (
         </Datagrid>
     </List>
 );
+export const QRList = props => {
+    const { currentUser, userRole } = useAuth()
+    if(currentUser == null) {
+        return (
+            <ClipLoader color={"#ffffff"} loading={true} css={override} size={150} />
+        )
+    }
+    else return (
+    <List {...props} filter={{uid: currentUser.uid.toString()}}>
+        <Datagrid>
+            <TextField source="id" />
+            <TextField source="uid" />
+            <TextField source="number" />
+            <TextField source="faculty" />
+            <UrlField source="view" />
+            <UrlField source="link" />
+        </Datagrid>
+    </List>)
+};

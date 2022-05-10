@@ -1,12 +1,16 @@
 import React, {useState} from 'react'
-import { Navbar } from '../components/Navbar'
+import { Admin, Resource } from 'react-admin';
 import { doc, setDoc } from "firebase/firestore"; 
-import { db } from '../utils/init-firebase'
+import { db, auth, dataProvider } from '../utils/init-firebase'
 import { useHistory } from 'react-router-dom'
-import { Button, Input, Grid, GridItem,chakra, Container, Heading, Box, Center, Text, Table, Th, Tr, Tbody, Td, TableContainer } from '@chakra-ui/react'
+import { Button, Input, Container, Heading, Box, Center, Text, Table, Tr, Tbody, Td, TableContainer, Select } from '@chakra-ui/react'
 import { Layout } from '../components/Layout'
+import { QRList } from '../adminList';
+import { QRLayout } from '../adminLayout'
 
 function QRgenerator() {
+
+    const user = auth.currentUser
     const history = useHistory();
     const [number, setNumber] = useState("");
     const [faculty, setFaculty] = useState("");
@@ -17,11 +21,16 @@ function QRgenerator() {
         const id = md5(timestamp).substring(0, 13)
         setDoc(doc(db, "qrcodes", id), {
             number: number,
-            faculty: faculty
+            faculty: faculty,
+            uid: user.uid.toString(),
+            view: "https://localhost:3000/qrcode/"+id,
+            link: "https://localhost:3000/scan/"+id,
         });
         history.push('/qrcode/'+id)
       }
+    
     return (
+      <Box>
         <form onSubmit={handleSubmit}>
 <Layout>
       <Heading>Generate QR Code</Heading>
@@ -38,7 +47,11 @@ function QRgenerator() {
                 </Tr>
                 <Tr>
                   <Td><Text fontSize={20} as='i'>Faculty number</Text></Td>
-                  <Td><Input type='number' required value={faculty} onChange={e => setFaculty(e.target.value)}/></Td>
+                  <Td><Select placeholder="Select faculty" onChange={e => setFaculty(e.target.value)}>
+                        <option value="IX">IX</option>
+                        <option value="X">X</option>
+                        <option value="XI">XI</option>
+                      </Select></Td>
                 </Tr>
                 </Tbody>  
              </Table>
@@ -51,6 +64,10 @@ function QRgenerator() {
       </Center>
 </Layout>
         </form>
+        <Admin layout={QRLayout} dataProvider={dataProvider} >
+        <Resource name="qrcodes" list={QRList} />
+        </Admin>
+      </Box>
     );
   }
   

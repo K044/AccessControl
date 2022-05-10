@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
+import { FirebaseDataProvider, FirebaseAuthProvider } from "react-admin-firebase";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -19,3 +20,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const dataProvider = FirebaseDataProvider(firebaseConfig);
+export const authProvider = FirebaseAuthProvider(firebaseConfig);

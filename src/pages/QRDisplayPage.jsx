@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Navbar } from '../components/Navbar'
-import {Fab, TextField, TextareaAutosize, Grid} from '@material-ui/core'
+import {Fab, TextareaAutosize, Grid} from '@material-ui/core'
 import {ArrowBack, GetApp} from '@material-ui/icons'
 import { Link } from "react-router-dom";
 import QRCode from 'qrcode.react'
@@ -10,9 +10,6 @@ function QRDisplayPage() {
     const { id } = useParams();
     const link = 'https://localhost:3000/scan/'+id
     const [qr, setQr] = useState(link);
-    const handleChange = (event) => {
-        setQr(event.target.value);
-    };
     const downloadQR = () => {
         const canvas = document.getElementById("myqr");
         const pngUrl = canvas
@@ -25,6 +22,7 @@ function QRDisplayPage() {
         downloadLink.click();
         document.body.removeChild(downloadLink);
     };
+    
     return (
         <div>
         <Navbar/>
