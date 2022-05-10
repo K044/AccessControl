@@ -8,12 +8,12 @@ import { FirebaseDataProvider, FirebaseAuthProvider } from "react-admin-firebase
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCYc87fc9JCCY27dbGxYz0wfLNEUxxmx0Q",
-  authDomain: "accesscontrol-1802c.firebaseapp.com",
-  projectId: "accesscontrol-1802c",
-  storageBucket: "accesscontrol-1802c.appspot.com",
-  messagingSenderId: "1071945370796",
-  appId: "1:1071945370796:web:6c65b880a574fa92e3a309"
+  apiKey: `${process.env.REACT_APP_API_KEY}`,
+  authDomain: `${process.env.REACT_APP_AUTH_DOMAIN}`,
+  projectId: `${process.env.REACT_APP_PROJECT_ID}`,
+  storageBucket: `${process.env.REACT_APP_STORAGE_BUCKET}`,
+  messagingSenderId: `${process.env.REACT_APP_MESSAGING_SERNDER_ID}`,
+  appId: `${process.env.REACT_APP_ID}`
 };
 
 // Initialize Firebase
