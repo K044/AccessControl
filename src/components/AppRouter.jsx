@@ -43,7 +43,7 @@ export default function AppRouter(props) {
           <ProtectedRoute exact path='/qrgenerator' component={QRGeneratorPage} />
           <ProtectedRoute exact path='/qrcode/:id' component={QRDisplayPage} />
           <ProtectedRoute exact path='/scan/:id' component={QRCheckPage} />
-          <ProtectedRoute exact path='/calendar' role={2} component={CalendarPage} />
+          <ProtectedRoute exact path='/calendar' component={CalendarPage} />
           <ProtectedRoute
             exact
             path='/forgot-password'
