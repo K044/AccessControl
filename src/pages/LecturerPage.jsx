@@ -13,7 +13,7 @@ export default function LecturerPage() {
             <Center>
             <Stack spacing={6} direction='column' align='center'>
                 <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
-                <Navlink to='/doesnotexist' name='My Calendar'/>
+                <Navlink to='/calendar' name='My Calendar'/>
                 </Button>
                 <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
                 <Navlink to='/doesnotexist' name='Check Student Attendance'/>
