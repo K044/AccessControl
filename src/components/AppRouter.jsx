@@ -15,7 +15,6 @@ import Loginpage from '../pages/LoginPage'
 import NotfoundPage from '../pages/NotFoundPage'
 import Profilepage from '../pages/ProfilePage'
 import Registerpage from '../pages/RegisterPage'
-import ResetPasswordPage from '../pages/ResetPasswordPage'
 import TestPage from '../pages/TestPage'
 import AdminPage from '../pages/AdminPage'
 import LecturerPage from '../pages/LecturerPage'
@@ -25,6 +24,7 @@ import QRGeneratorPage from "../pages/QRGeneratorPage";
 import QRDisplayPage from "../pages/QRDisplayPage";
 import QRCheckPage from "../pages/QRCheckPage";
 import CalendarPage from "../pages/CalendarPage"
+import ChangePasswordPage from '../pages/ChangePasswordPage';
 
 export default function AppRouter(props) {
   return (
@@ -49,7 +49,7 @@ export default function AppRouter(props) {
             path='/forgot-password'
             component={ForgotPasswordPage}
           />
-          <ProtectedRoute exact path='/reset-password' component={ResetPasswordPage} />
+          <ProtectedRoute exact path='/change-password' component={ChangePasswordPage} />
           <Route exact path='*' component={NotfoundPage} />
         </Switch>
       </Router>

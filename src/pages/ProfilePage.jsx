@@ -58,7 +58,6 @@ export default function Profilepage() {
           </Box>
           <Center>
             <Navlink  colorScheme='pink' size='lg' width="200px" variant ='outline' mt={5} to='/change-password' name='Change Password'/>
-            <Navlink  ml={5} colorScheme='teal' size='lg' width="200px" variant ='outline' mt={5} to='/edit-profile' name='Edit Profile'/>
           </Center>
         </Container>
       </Center>
