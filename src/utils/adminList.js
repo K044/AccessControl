@@ -1,6 +1,6 @@
 import * as React from "react";
 import { SelectField, List, Datagrid, TextField, EmailField, Edit, SimpleForm, ReferenceInput, SelectInput, UrlField  } from 'react-admin';
-import { useAuth } from './contexts/AuthContext'
+import { useAuth } from '../contexts/AuthContext'
 import { ClipLoader } from 'react-spinners'
 import { css } from "@emotion/react";
 

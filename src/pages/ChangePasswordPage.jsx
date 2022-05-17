@@ -13,6 +13,7 @@ import {
   import { Layout } from '../components/Layout'
   import { useHistory, useLocation } from 'react-router-dom'
   import { useAuth } from '../contexts/AuthContext'
+  import { reauthenticateWithCredential, EmailAuthProvider, updatePassword } from 'firebase/auth'
   
   export default function ChangePasswordPage() {
     const { currentUser } = useAuth()
@@ -31,8 +32,25 @@ import {
             onSubmit={async e => {
               e.preventDefault()
               try {
-                // https://medium.com/@ericmorgan1/change-user-email-password-in-firebase-and-react-native-d0abc8d21618#:~:text=Changing%20the%20current%20user%27s%20email,newPassword)%20on%20the%20user%20object.
+                if(newPassword == newPasswordConfirm) {
+                  const credential = EmailAuthProvider.credential(
+                    currentUser.email,
+                    oldPassword
+                   );
+                  reauthenticateWithCredential(currentUser, credential).then(() => {
+                    updatePassword(currentUser, newPassword).then(() => {
+                      console.log("password updated")
+                    }, (error) => {
+                      console.log("change password failed")
+                    });
+                    history.push("/profile")
+                  }).catch((error) => {
+                    console.log(error)
+                    //cia reiktu modal idet kad wrong password
+                  });
+                }
               } catch (error) {
+                console.log(error)
               }
             }}
           >

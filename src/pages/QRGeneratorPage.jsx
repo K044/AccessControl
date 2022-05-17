@@ -5,8 +5,8 @@ import { db, auth, dataProvider } from '../utils/init-firebase'
 import { useHistory } from 'react-router-dom'
 import { Button, Input, Container, Heading, Box, Center, Text, Table, Tr, Tbody, Td, TableContainer, Select } from '@chakra-ui/react'
 import { Layout } from '../components/Layout'
-import { QRList } from '../adminList';
-import { QRLayout } from '../adminLayout'
+import { QRList } from '../utils/adminList';
+import { QRLayout } from '../utils/adminLayout'
 
 function QRgenerator() {
 

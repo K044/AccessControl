@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Admin, Resource } from 'react-admin';
 import { Navbar } from '../components/Navbar'
-import { UserList, UserEdit, RoleList } from '../adminList';
-import { AdminLayout } from '../adminLayout'
+import { UserList, UserEdit, RoleList } from '../utils/adminList';
+import { AdminLayout } from '../utils/adminLayout'
 import { Box } from '@chakra-ui/react'
 import { authProvider, dataProvider } from '../utils/init-firebase'
 
