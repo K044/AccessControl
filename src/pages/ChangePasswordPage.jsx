@@ -7,6 +7,8 @@ import {
     Input,
     Stack,
     useToast,
+    Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter,
+    useDisclosure,
   } from '@chakra-ui/react'
   import React, { useState } from 'react'
   import { Card } from '../components/Card'
@@ -20,8 +22,15 @@ import {
     const history = useHistory()
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
+    const [header, setHeader] = useState('')
+    const [body, setBody] = useState('')
     const [newPasswordConfirm, setNewPasswordConfirm] = useState('')
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const toast = useToast()
+    function redirect(){
+      onClose()
+      history.push("/profile")
+    }
     return (
       <Layout>
         <Heading textAlign='center' my={12}>
@@ -39,14 +48,18 @@ import {
                    );
                   reauthenticateWithCredential(currentUser, credential).then(() => {
                     updatePassword(currentUser, newPassword).then(() => {
-                      console.log("password updated")
+                      setHeader("Password")
+                      setBody("Password was changed succesfully")
+                      document.getElementById("btn").click()
                     }, (error) => {
-                      console.log("change password failed")
+                      setHeader("Password")
+                      setBody("Password change was not succesful, because new password is too short")
+                      document.getElementById("btn").click()
                     });
-                    history.push("/profile")
                   }).catch((error) => {
-                    console.log(error)
-                    //cia reiktu modal idet kad wrong password
+                    setHeader("Password")
+                    setBody("Password change was not succesful, because old password is wrong")
+                    document.getElementById("btn").click()
                   });
                 }
               } catch (error) {
@@ -54,6 +67,18 @@ import {
               }
             }}
           >
+          <Button id="btn" onClick={onOpen}hidden>Test Modal</Button>
+          <Modal isOpen={isOpen} onClose={redirect}>
+            <ModalOverlay />
+              <ModalContent>
+                <ModalHeader>{header}</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>{body}</ModalBody>
+              <ModalFooter>
+              <Button colorScheme='blue' mr={3} onClick={redirect}>Close</Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
             <Stack spacing='6'>
               <FormControl id='oldPassword'>
                 <FormLabel>Old Password</FormLabel>
