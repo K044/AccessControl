@@ -5,7 +5,7 @@ import { Layout } from '../components/Layout'
 export default function NotfoundPage() {
   return (
     <Layout>
-      <Heading>Not found page</Heading>
+      <img src="/404.png" alt="Page not found"/>
     </Layout>
   )
 }
