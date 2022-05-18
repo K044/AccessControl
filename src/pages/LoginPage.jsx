@@ -79,7 +79,7 @@ export default function LoginPage() {
               .catch(error => {
                 console.log(error.message)
                 toast({
-                  description: error.message,
+                  description: "Your email or password is incorrect",
                   status: 'error',
                   duration: 9000,
                   isClosable: true,

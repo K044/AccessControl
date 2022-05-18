@@ -61,6 +61,10 @@ import {
                 .then(res => {})
                 .catch(error => {
                   console.log(error.message)
+                  if(error.message === "Firebase: Error (auth/email-already-in-use).")
+                    error.message = "Email is already in use"
+                  else if(error.message === "Firebase: Password should be at least 6 characters (auth/weak-password).")
+                    error.message = "Password should be at least 6 characters"
                   toast({
                     description: error.message,
                     status: 'error',
