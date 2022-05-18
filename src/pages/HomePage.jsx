@@ -31,9 +31,11 @@ export default function Homepage() {
                     <GridItem w='100%' h='10' align='center'>
                         <Navlink to='/qrscanner' name='QR Scanner' colorScheme='teal' size='lg' width="350px" variant ='outline'/>
                     </GridItem>
+                    {userRole > 1 && (
                     <GridItem w='100%' h='10' align='center'>
                         <Navlink to='/qrgenerator' name='QR Generator' colorScheme='teal' size='lg' width="350px" variant ='outline'/>
                     </GridItem>
+                    )}
                 </Grid>
             )}
         </Layout>
