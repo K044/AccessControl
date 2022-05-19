@@ -9,7 +9,7 @@ export default function LecturerPage() {
   return (
       <Layout>
           <Box>
-            <Heading>Lecturers page</Heading><br></br>
+            <Heading>Lecturers Panel</Heading><br></br>
             <Center>
             <Stack spacing={6} direction='column' align='center'>
                 <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
