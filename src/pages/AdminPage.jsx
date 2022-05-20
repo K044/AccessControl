@@ -13,6 +13,7 @@ return (
         <Navbar />
         <Admin layout={AdminLayout} dataProvider={dataProvider} authProvider={authProvider}>
         <Resource name="users" list={UserList} edit={UserEdit} />
+        <Resource name="roles" list={RoleList} />
         </Admin>
     </Box>
         
