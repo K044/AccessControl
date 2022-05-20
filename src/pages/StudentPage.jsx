@@ -31,7 +31,7 @@ export default function StudentPage() {
                             <Navlink to='/calendar' name='My Calendar'/>
                             </Button>
                             <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
-                            <Navlink to='/doesnotexist' name='Check My Attendance'/>
+                            <Navlink to='/attendance' name='Check My Attendance'/>
                             </Button>
                             </Stack>
                             </Center>

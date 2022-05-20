@@ -23,8 +23,8 @@ function QRgenerator() {
             number: number,
             faculty: faculty,
             uid: user.uid.toString(),
-            view: "https://localhost:3000/qrcode/"+id,
-            link: "https://localhost:3000/scan/"+id,
+            view: "https://accesscontrol-1802c.web.app/qrcode/"+id,
+            link: "https://accesscontrol-1802c.web.app/scan/"+id,
         });
         history.push('/qrcode/'+id)
       }

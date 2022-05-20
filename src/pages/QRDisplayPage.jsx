@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom'
 
 function QRDisplayPage() {
     const { id } = useParams();
-    const link = 'https://localhost:3000/scan/'+id
+    const link = 'https://accesscontrol-1802c.web.app/scan/'+id
     const [qr, setQr] = useState(link);
     const downloadQR = () => {
         const canvas = document.getElementById("myqr");

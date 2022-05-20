@@ -58,7 +58,7 @@ export default function AuthContextProvider({ children }) {
 
   function forgotPassword(email) {
     return sendPasswordResetEmail(auth, email, {
-      url: `http://localhost:3000/login`,
+      url: `http://https://accesscontrol-1802c.web.app/login`,
     })
   }
 

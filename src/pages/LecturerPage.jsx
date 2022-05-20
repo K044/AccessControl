@@ -16,7 +16,7 @@ export default function LecturerPage() {
                 <Navlink to='/calendar' name='My Calendar'/>
                 </Button>
                 <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
-                <Navlink to='/doesnotexist' name='Check Student Attendance'/>
+                <Navlink to='/attendance' name='Check Student Attendance'/>
                 </Button>
                 <Button colorScheme='teal' size='lg' width="350px" variant ='outline'>
                 <Navlink to='/doesnotexist' name='Add Students/Guests to Class'/>

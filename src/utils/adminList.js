@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SelectField, List, Datagrid, TextField, EmailField, Edit, SimpleForm, ReferenceInput, SelectInput, UrlField  } from 'react-admin';
+import { SelectField, List, Datagrid, TextField, EmailField, Edit, SimpleForm, ReferenceInput, SelectInput, UrlField, ReferenceField  } from 'react-admin';
 import { useAuth } from '../contexts/AuthContext'
 import { ClipLoader } from 'react-spinners'
 import { css } from "@emotion/react";
@@ -45,7 +45,7 @@ export const RoleList = props => (
     </List>
 );
 export const QRList = props => {
-    const { currentUser, userRole } = useAuth()
+    const { currentUser } = useAuth()
     if(currentUser == null) {
         return (
             <ClipLoader color={"#ffffff"} loading={true} css={override} size={150} />
@@ -60,6 +60,46 @@ export const QRList = props => {
             <TextField source="faculty" />
             <UrlField source="view" />
             <UrlField source="link" />
+        </Datagrid>
+    </List>)
+};
+export const AttendanceList = props => {
+    const { currentUser } = useAuth()
+    if(currentUser == null) {
+        return (
+            <ClipLoader color={"#ffffff"} loading={true} css={override} size={150} />
+        )
+    }
+    else return (
+    <List {...props}>
+        <Datagrid>
+        <   ReferenceField label="User" source="uid" reference="users">
+                <TextField source="email" />
+            </ReferenceField>
+            <TextField source="date" />
+            <TextField source="time" />
+            <TextField source="classroom" />
+            <TextField source="faculty" />
+        </Datagrid>
+    </List>)
+};
+export const AttendanceListStudent = props => {
+    const { currentUser } = useAuth()
+    if(currentUser == null) {
+        return (
+            <ClipLoader color={"#ffffff"} loading={true} css={override} size={150} />
+        )
+    }
+    else return (
+    <List {...props} filter={{uid: currentUser.uid.toString()}}>
+        <Datagrid>
+        <   ReferenceField label="User" source="uid" reference="users">
+                <TextField source="email" />
+            </ReferenceField>
+            <TextField source="date" />
+            <TextField source="time" />
+            <TextField source="classroom" />
+            <TextField source="faculty" />
         </Datagrid>
     </List>)
 };

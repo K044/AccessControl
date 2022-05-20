@@ -25,6 +25,7 @@ import QRDisplayPage from "../pages/QRDisplayPage";
 import QRCheckPage from "../pages/QRCheckPage";
 import CalendarPage from "../pages/CalendarPage"
 import ChangePasswordPage from '../pages/ChangePasswordPage';
+import AttendancePage from '../pages/AttendancePage';
 
 export default function AppRouter(props) {
   return (
@@ -44,6 +45,7 @@ export default function AppRouter(props) {
           <ProtectedRoute exact path='/qrcode/:id' component={QRDisplayPage} />
           <ProtectedRoute exact path='/scan/:id' component={QRCheckPage} />
           <ProtectedRoute exact path='/calendar' component={CalendarPage} />
+          <ProtectedRoute exact path='/attendance' component={AttendancePage} />
           <ProtectedRoute
             exact
             path='/forgot-password'

@@ -4,22 +4,40 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { Navbar } from '../components/Navbar'
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db, auth } from "../utils/init-firebase"
+
 
 let eventGuid = 0
 let todayStr = new Date().toISOString().replace(/T.*$/, '') // YYYY-MM-DD of today
 
-const INITIAL_EVENTS = [
-    {
-      id: createEventId(),
-      title: '102. XI',
-      start: todayStr + 'T12:00:00',
-      end: todayStr + 'T13:30:00'
-    }
-  ]
-  
-  function createEventId() {
-    return String(eventGuid++)
-  }
+var events = [];
+
+(async () =>
+  auth.onAuthStateChanged(async function(user) {
+    events = []
+    if(user) {
+      const q = query(collection(db, "events"), where("uid", "==", user.uid));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      const event = {
+        id: createEventId(),
+        title: doc.data().location,
+        start: doc.data().date + 'T' + doc.data().startTime,
+        end: doc.data().date + 'T' + doc.data().endTime,
+      }
+      events.push(event);
+    });
+  }}
+  )
+    
+    
+
+)()
+
+function createEventId() {
+  return String(eventGuid++)
+}
 
 export default class CalendarPage extends React.Component {
 
@@ -29,35 +47,39 @@ export default class CalendarPage extends React.Component {
   }
 
   render() {
+    const user = auth.currentUser;
+    if (!user) {
+      return;
+    }
     return (
-        
+
       <div className='demo-app'>
-          <Navbar/>
-        {this.renderSidebar()}
+        <Navbar />
+        
         <div className='demo-app-main'>
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
             headerToolbar={{
-              left: 'prev,next today',
+              left: 'prev,next',
               center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+              right: ''
             }}
-            initialView='dayGridMonth'
-            editable={true}
-            selectable={true}
+            allDaySlot={false}
+            initialView='timeGridWeek'
+            editable={false}
+            selectable={false}
             selectMirror={true}
             dayMaxEvents={true}
-            weekends={this.state.weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={this.handleDateSelect}
+            weekends={false}
+            initialEvents={events} // alternatively, use the `events` setting to fetch from a feed
+            //select={this.handleDateSelect}
             eventContent={renderEventContent} // custom render function
-            eventClick={this.handleEventClick}
             eventsSet={this.handleEvents} // called after events are initialized/added/changed/removed
-            /* you can update a remote database when these fire:
-            eventAdd={function(){}}
-            eventChange={function(){}}
-            eventRemove={function(){}}
-            */
+          /* you can update a remote database when these fire:
+          eventAdd={function(){}}
+          eventChange={function(){}}
+          eventRemove={function(){}}
+          */
           />
         </div>
       </div>
@@ -101,27 +123,6 @@ export default class CalendarPage extends React.Component {
     })
   }
 
-  handleDateSelect = (selectInfo) => {
-    let title = prompt('Please enter a new title for your event')
-    let calendarApi = selectInfo.view.calendar
-
-    calendarApi.unselect() // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      })
-    }
-  }
-
-  handleEventClick = (clickInfo) => {
-      clickInfo.event.remove()
-  }
-
   handleEvents = (events) => {
     this.setState({
       currentEvents: events
@@ -142,7 +143,7 @@ function renderEventContent(eventInfo) {
 function renderSidebarEvent(event) {
   return (
     <li key={event.id}>
-      <b>{formatDate(event.start, {year: 'numeric', month: 'short', day: 'numeric'})}</b>
+      <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
       <i>{event.title}</i>
     </li>
   )
