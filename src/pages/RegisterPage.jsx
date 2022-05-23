@@ -36,6 +36,29 @@ import {
         mounted.current = false
       }
     }, [])
+   
+      const [txt, setTxt] = useState('');
+     
+      const onInputChangeL = e => {
+        const { value } = e.target;
+        console.log('Input value: ', value);
+     
+        const re = /^[A-Za-z]+$/;
+        if (value === "" || re.test(value)) {
+          setLastname(value);
+        }
+      }
+      const onInputChangeN = e => {
+        const { value } = e.target;
+        console.log('Input value: ', value);
+     
+        const re = /^[A-Za-z]+$/;
+        if (value === "" || re.test(value)) {
+          setName(value);
+        }
+      }
+    
+    
   
     return (
       <Layout>
@@ -99,7 +122,7 @@ import {
                   autoComplete='name'
                   required
                   value={name}
-                  onChange={e => setName(e.target.value)}
+                  onChange={onInputChangeN}
                 />
               </FormControl>
               <FormControl id='lastname'>
@@ -110,7 +133,7 @@ import {
                   autoComplete='lastname'
                   required
                   value={lastname}
-                  onChange={e => setLastname(e.target.value)}
+                  onChange={onInputChangeL} 
                 />
               </FormControl>
               <FormControl id='email'>
