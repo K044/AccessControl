@@ -21,6 +21,7 @@ import {
     const { currentUser } = useAuth()
     const history = useHistory()
     const [oldPassword, setOldPassword] = useState('')
+    const [success, setSuccess] = useState('')
     const [newPassword, setNewPassword] = useState('')
     const [header, setHeader] = useState('')
     const [body, setBody] = useState('')
@@ -29,7 +30,9 @@ import {
     const toast = useToast()
     function redirect(){
       onClose()
-      history.push("/profile")
+      if(success){
+        history.push("/profile")
+      }
     }
     return (
       <Layout>
@@ -51,16 +54,24 @@ import {
                       setHeader("Password")
                       setBody("Password was changed succesfully")
                       document.getElementById("btn").click()
+                      setSuccess(true)
                     }, (error) => {
                       setHeader("Password")
-                      setBody("Password change was not succesful, because new password is too short")
+                      setBody("Password change was not succesful, because new password is too short!")
                       document.getElementById("btn").click()
+                      setSuccess(false)
                     });
                   }).catch((error) => {
                     setHeader("Password")
-                    setBody("Password change was not succesful, because old password is wrong")
+                    setBody("Password change was not succesful, because old password is wrong!")
                     document.getElementById("btn").click()
+                    setSuccess(false)
                   });
+                }else{
+                  setHeader("Password")
+                  setBody("Password change was not succesful, because new password is incorrect!")
+                  document.getElementById("btn").click()
+                  setSuccess(false)
                 }
               } catch (error) {
                 console.log(error)
