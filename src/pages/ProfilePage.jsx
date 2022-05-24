@@ -32,11 +32,10 @@ export default function Profilepage() {
   })
   return (
       <Layout>
-      <Heading>Profile page</Heading>
+      <Heading>User profile information</Heading>
       <Center>
         <Container>
           <Box boxShadow='base' mt={5} w='100%' p={4} borderWidth='1px' borderRadius='lg'>
-            <Center><Heading fontSize='3xl'>User profile information</Heading></Center>
             <TableContainer>
               <Table size='sm'>
                 <Tbody>

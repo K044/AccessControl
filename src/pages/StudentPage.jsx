@@ -20,7 +20,7 @@ export default function StudentPage() {
     }, [currentUser]);
     return (
         <Layout>
-            <Heading>Students page</Heading><br></br>
+            <Heading>Students Panel</Heading><br></br>
             {currentUser && (
                 <Grid gap={6}>
                     {role === 1 && (
